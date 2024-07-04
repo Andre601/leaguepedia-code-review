@@ -29,11 +29,13 @@ function p._main(args)
         for i2, v2 in ipairs(ranks) do
             local rarity = v[v2.rank]
             if rarity ~= nil then
-        	    if rarity.chance ~= nil then
-        	    	row:tag('td'):wikitext(rarity.chance .. '%')
-        	    else
-        	    	row:tag('td'):wikitext('N/A')
-        	    end
+            	if rarity.chance == nil then
+            		row:tag('td'):wikitext('N/A')
+            	elseif rarity.chance < 0 then
+            		row:tag('td'):wikitext('-')
+        		else
+        			row:tag('td'):wikitext(rarity.chance .. '%')
+    			end
                 row:tag('td'):wikitext(rarity.tile_multiplier)
                 row:tag('td'):wikitext(rarity.gold_multiplier)
             end
@@ -67,12 +69,15 @@ function p._wednesday(args)
         for i2, v2 in ipairs(ranks) do
             local rarity = v[v2.rank]
             if rarity ~= nil then
-                if rarity.wed_chance ~= nil then
-                    row:tag('td'):wikitext(rarity.wed_chance .. '%')
-                    row:tag('td'):wikitext(rarity.wed_chance - rarity.chance)
-                else
-                    row:tag('td'):wikitext('N/A')
-                    row:tag('td'):wikitext('N/A')
+            	if rarity.wed_chance == nil then
+            		row:tag('td'):wikitext('N/A')
+            		row:tag('td'):wikitext('N/A')
+            	elseif rarity.wed_chance < 0 then
+    				row:tag('td'):wikitext('-')
+    				row:tag('td'):wikitext('-')
+				else
+					row:tag('td'):wikitext(rarity.wed_chance .. '%')
+					row:tag('td'):wikitext(rarity.wed_chance - rarity.chance)
                 end
             end
     	end
