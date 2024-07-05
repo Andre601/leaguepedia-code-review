@@ -7,7 +7,7 @@ local h = {} -- For some helper methods...
 local tileChances = mw.loadJsonData('Data:Tile_Chances')
 
 function p.main(frame)
-    local arg = frame.args[0]
+    local arg = frame.args[1]
     if arg == nil then
         return {}
     end
@@ -88,7 +88,7 @@ end
 function h.printHeader(row, ranks, rowspan, colspan)
     row:tag('th'):attr('rowspan', rowspan):addClass('wikitable-text--bottom'):wikitext('Rarity')
     for _, rank in ipairs(ranks) do
-        row:tag('th'):attr('colspan', colspan):wikitext(rank.display)
+        row:tag('th'):attr('colspan', colspan):wikitext(rank)
     end
 end
 
