@@ -4,7 +4,7 @@
 local p = {}
 local h = {} -- For some helper methods...
 
-local tileChances = mw.loadJSONData('Data:Tile_Chances')
+local tileChances = mw.loadJsonData('Data:Tile_Chances')
 
 function p.main(frame)
     local arg = frame.args[0]
@@ -35,7 +35,7 @@ function p._main()
         row:tag('th'):wikitext('Tile Multiplier')
         row:tag('th'):wikitext('Gold Multiplier')
     end
-    for _, chance in ipairs(json.chances) do
+    for _, chance in ipairs(tileChances.chances) do
         local row = tbl:tag('tr')
         h.addDefRow(row, chance, ranks)
     end
@@ -43,7 +43,7 @@ function p._main()
 end
 
 function p._wednesday()
-    local ranks = json.ranks
+    local ranks = tileChances.ranks
     local output = mw.html.create()
     local tbl = output:tag('table'):addClass('wikitable'):addClass('wikitable-text--right')
     local row = tbl:tag('tr')
@@ -53,7 +53,7 @@ function p._wednesday()
         row:tag('th'):wikitext('Chance')
         row:tag('th'):wikitext('Difference')
     end
-    for _, chance in ipairs(json.chances) do
+    for _, chance in ipairs(tileChances.chances) do
         local row = tbl:tag('tr')
         h.addWedRow(row, chance, ranks)
     end
@@ -61,7 +61,7 @@ function p._wednesday()
 end
 
 function p._sunday()
-    local ranks = json.ranks
+    local ranks = tileChances.ranks
     local output = mw.html.create()
     local tbl = output:tag('table'):addClass('wikitable'):addClass('wikitable-text--right')
     local row = tbl:tag('tr')
@@ -78,7 +78,7 @@ function p._sunday()
         row:tag('th'):wikitext('Value')
         row:tag('th'):wikitext('Difference')
     end
-    for _, chance in ipairs(json.chances) do
+    for _, chance in ipairs(tileChances.chances) do
         local row = tbl:tag('tr')
         h.addSunRow(row, chance, ranks)
     end
